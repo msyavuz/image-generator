@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Configuration, OpenAIApi } from "openai";
 
 type Data = {
-    imageUrl?: string;
+    imageUrls?: string[];
     error?: string;
 };
 
@@ -18,16 +18,20 @@ export default async function handler(
 
     if (req.method === "GET") {
         const prompt = req.query.prompt;
-        if (!prompt) {
-            res.send({ error: "A prompt must be given" });
+        let n = req.query.n;
+        if (!prompt || !n) {
+            res.send({ error: "A prompt and number must be given" });
         } else {
             const response = await openai.createImage({
                 prompt: prompt.toString(),
-                n: 1,
+                n: parseInt(n.toString()),
                 size: "512x512",
             });
-            const imageUrl = response.data.data[0].url;
-            res.send({ imageUrl });
+            const imageUrls: string[] = [];
+            for (let data of response.data.data) {
+                imageUrls.push(data.url!);
+            }
+            res.send({ imageUrls });
         }
     } else {
         res.send({ error: "Invalid method, only GET requests are accepted." });
