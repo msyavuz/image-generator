@@ -9,7 +9,7 @@ export default function Home() {
     const [prompt, setPrompt] = useState("");
     const [loading, setLoading] = useState(false);
     const [numbers, setNumbers] = useState(1);
-    const [size, setSize] = useState("");
+    const [size, setSize] = useState("256x256");
 
     async function getImage() {
         const resp = await fetch(
@@ -36,13 +36,14 @@ export default function Home() {
                 name="size"
                 id="size"
                 onChange={(e) => {
+                    console.log(e.target.value);
                     setSize(e.target.value);
                 }}
                 className="text-black px-2 py-1"
             >
-                <option value="1024x1024">1024x1024</option>
-                <option value="512x512">512x512</option>
                 <option value="256x256">256x256</option>
+                <option value="512x512">512x512</option>
+                <option value="1024x1024">1024x1024</option>
             </select>
             <select
                 name="number"
