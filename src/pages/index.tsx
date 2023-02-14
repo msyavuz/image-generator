@@ -31,7 +31,6 @@ export default function Home() {
                     setPrompt(e.target.value);
                 }}
             />
-            <p>Number of images</p>
             <select
                 name="size"
                 id="size"
