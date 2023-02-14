@@ -9,9 +9,12 @@ export default function Home() {
     const [prompt, setPrompt] = useState("");
     const [loading, setLoading] = useState(false);
     const [numbers, setNumbers] = useState(1);
+    const [size, setSize] = useState("");
 
     async function getImage() {
-        const resp = await fetch(`/api/image?prompt=${prompt}&n=${numbers}`);
+        const resp = await fetch(
+            `/api/image?prompt=${prompt}&n=${numbers}&size=${size}`,
+        );
         const obj = (await resp.json()) as response;
         const url = obj.imageUrls;
         setImageSrc(url);
@@ -29,6 +32,18 @@ export default function Home() {
                 }}
             />
             <p>Number of images</p>
+            <select
+                name="size"
+                id="size"
+                onChange={(e) => {
+                    setSize(e.target.value);
+                }}
+                className="text-black px-2 py-1"
+            >
+                <option value="1024x1024">1024x1024</option>
+                <option value="512x512">512x512</option>
+                <option value="256x256">256x256</option>
+            </select>
             <select
                 name="number"
                 id="number"
