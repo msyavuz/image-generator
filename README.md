@@ -2,4 +2,4 @@
 
 ![Screenshot](https://github.com/msyavuz/image-generator/blob/main/assets/Screenshot.png?raw=true)
 
-[Live Version](https://image-generator-bht9ppt3q-msyavuz.vercel.app/)
+[Live Version](https://image-generator-msyavuz.vercel.app/)
